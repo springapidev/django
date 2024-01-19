@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Person List {% endblock %}
+
+
+{% block content %}
+
+<a href="{% url 'person_new' %}">Add New</a>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Hobbies</th>
+            <th>Country</th>
+            <th>Date Of Birth</th>
+            <th>Comments</th>
+            <th>Action</th>
+        </tr>
+        {% for person in people %}
+            <tr>
+                <td>{{ person.name }}</td>
+                <td>{{ person.get_gender_display }}</td>
+                <td>{% if person.hobbies.all %} {{ person.hobbies.all | join:", " }}{% else %}None{% endif %}</td>
+                <td>{{ person.get_country_display }}</td>
+                <td>{{ person.birth_date }}</td>
+                <td>{{ person.comments }}</td>
+                <td>
+                    <a href="{% url 'person_detail' pk=person.pk %}">View Detail</a>
+                    <a href="{% url 'person_edit' pk=person.pk %}">Edit</a>
+                    <a href="{% url 'person_delete' pk=person.pk %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

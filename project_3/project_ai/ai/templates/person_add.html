@@ -1,0 +1,13 @@
+{% extends 'main_layout.html' %}
+{% block title %} Person Add {% endblock %}
+{% block content %}
+    <h2>Add Person</h2>
+    <form method="post" action="{% url 'add' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add New</button>
+    </form>
+    <br/>
+      <a href="{% url 'list' %}">View list</a>
+     <br/>
+{% endblock %}

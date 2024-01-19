@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Person Detail {% endblock %}
+
+{% block content %}
+
+
+    <h2>Person Detail</h2>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <td>{{ person.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ person.name }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ person.get_gender_display }}</td>
+        </tr>
+        <tr>
+            <th>Hobbies</th>
+            <td>{% if person.hobbies.all %} {{ person.hobbies.all | join:", " }}{% else %}None{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>{{ person.get_country_display }}</td>
+        </tr>
+        <tr>
+            <th>Comments</th>
+            <td>{{ person.comments }}</td>
+        </tr>
+    </table>
+  <a href="{% url 'person_edit' pk=person.pk %}">Edit</a>
+    <a href="{% url 'person_list' %}">Back To List</a>
+{% endblock %}
